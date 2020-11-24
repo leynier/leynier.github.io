@@ -32,7 +32,7 @@ nav:
 copyright: Copyright &copy; Leynier Gutiérrez González
 
 extra:
-  manifest: assets/manifest.json
+  manifest: manifest.json
   social:
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/leynier
