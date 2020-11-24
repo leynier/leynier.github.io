@@ -5,6 +5,8 @@ edit_uri: ""
 
 theme:
   name: material
+  logo: assets/images/avatar.png
+  favicon: assets/images/avatar.png
   features:
     - navigation.instant
     - navigation.tabs
@@ -13,6 +15,10 @@ theme:
     accent: light blue
 
 markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
   - toc:
       permalink: 🔗
 
@@ -26,6 +32,7 @@ nav:
 copyright: Copyright &copy; Leynier Gutiérrez González
 
 extra:
+  manifest: assets/manifest.json
   social:
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/leynier
