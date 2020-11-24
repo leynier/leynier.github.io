@@ -5,8 +5,8 @@ edit_uri: ""
 
 theme:
   name: material
-  logo: assets/images/avatar.png
-  favicon: assets/images/avatar.png
+  logo: assets/images/avatar.jpg
+  favicon: assets/images/avatar.jpg
   features:
     - navigation.instant
     - navigation.tabs
