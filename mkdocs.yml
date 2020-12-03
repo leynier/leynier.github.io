@@ -22,6 +22,10 @@ markdown_extensions:
   - toc:
       permalink: 🔗
 
+google_analytics:
+  - G-1ZVVREL82C
+  - auto
+
 nav:
   - Home:
     - Summary: index.md
