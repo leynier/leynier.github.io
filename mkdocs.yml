@@ -23,11 +23,27 @@ markdown_extensions:
       permalink: 🔗
 
 nav:
-  - Home: index.md
-  - Projects:
-    - Covid19 Cuba Data: projects/covid19-cuba-data/index.md
-    - Cuba Weather: projects/cuba-weather/index.md
-    - FuzzPy: projects/fuzzpy/index.md
+  - Home:
+    - Summary: home/index.md
+    - Statistics: home/statistics.md
+    - Experience: home/experience.md
+    - Education: home/education.md
+    - Projects: home/projects.md
+    - Courses: home/courses.md
+    - Certificates: home/certificates.md
+    - Skills: home/skills.md
+    - Languages: home/languages.md
+  - Blog 📝:
+    - Last Posts: blog/index.md
+    - Inferfuzzy:
+      - Introducción: blog/inferfuzzy/index.md
+      - Características: blog/inferfuzzy/features.md
+      - Implementación: blog/inferfuzzy/implementation.md
+      - Ejemplo: blog/inferfuzzy/usage.md
+      - Conclusiones: blog/inferfuzzy/conclusions.md
+      - Referencias: blog/inferfuzzy/references.md
+    - Hidato - Haskell: blog/hidato-haskell/index.md
+    - Cuba Weather - De Cuba Para Cuba: blog/cuba-weather-de-cuba-para-cuba/index.md
 
 copyright: Copyright &copy; Leynier Gutiérrez González
 
