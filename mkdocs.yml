@@ -24,7 +24,7 @@ markdown_extensions:
 
 nav:
   - Home:
-    - Summary: home/index.md
+    - Summary: index.md
     - Statistics: home/statistics.md
     - Experience: home/experience.md
     - Education: home/education.md
