@@ -1,6 +1,6 @@
-# Hi World! 👋 I'm Leynier Gutiérrez González 👨🏻‍💻
+# Hi World! 👋 I'm [Leynier Gutiérrez González](https://leynier.github.io) 👨🏻‍💻
 
-<codersrank-summary username="leynier"></codersrank-summary>
+> In this repo I maintain my site and blog using [GitHub Pages](https://pages.github.com) and [Material for MkDocs](https://squidfunk.github.io/mkdocs-material). They are available at [leynier.github.io](https://leynier.github.io).
 
 I'm a student of Computer Science. I know several programming languages such as C, C++, C#, Dart, Java, Python and Javascript; in addition to other markup or style languages such as HTML, CSS and JSON. I really like both mobile application development and web application development, using frameworks, software, technologies, etc like Android Studio, Flutter, Unity, Flask, Vue.js and Bootstrap.
 
