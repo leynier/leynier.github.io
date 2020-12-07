@@ -8,7 +8,7 @@ theme:
   logo: assets/images/avatar.jpg
   favicon: assets/images/avatar.jpg
   features:
-    - navigation.instant
+    # - navigation.instant
     - navigation.tabs
   palette:
     primary: black
@@ -19,6 +19,7 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - meta
   - toc:
       permalink: 🔗
 
@@ -28,30 +29,18 @@ google_analytics:
 
 nav:
   - Home:
-    - Summary: index.md
-    - Statistics: home/statistics.md
-    - Experience: home/experience.md
-    - Education: home/education.md
-    - Projects: home/projects.md
-    - Courses: home/courses.md
-    - Certificates: home/certificates.md
-    - Skills: home/skills.md
-    - Languages: home/languages.md
+    - Intro: index.md
+    - Blog 📝: ./blog
   - Blog 📝:
     - Last Posts: blog/index.md
-    - Inferfuzzy:
-      - Introducción: blog/inferfuzzy/index.md
-      - Características: blog/inferfuzzy/features.md
-      - Implementación: blog/inferfuzzy/implementation.md
-      - Ejemplo: blog/inferfuzzy/usage.md
-      - Conclusiones: blog/inferfuzzy/conclusions.md
-      - Referencias: blog/inferfuzzy/references.md
+    - Inferfuzzy: blog/inferfuzzy/index.md
     - Hidato - Haskell: blog/hidato-haskell/index.md
     - Cuba Weather - De Cuba Para Cuba: blog/cuba-weather-de-cuba-para-cuba/index.md
 
 copyright: Copyright &copy; Leynier Gutiérrez González
 
 extra:
+  disqus: leynier
   manifest: manifest.json
   social:
     - icon: fontawesome/brands/linkedin

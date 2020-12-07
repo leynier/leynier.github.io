@@ -1,3 +1,7 @@
+---
+disqus: ""
+---
+
 # Blog - Last Posts
 
 * [Inferfuzzy (October 30, 2020)](inferfuzzy)
