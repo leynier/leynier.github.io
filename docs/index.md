@@ -2,7 +2,7 @@
 disqus: ""
 ---
 
-# Hi World! 👋 I'm Leynier Gutiérrez González 👨🏻‍💻
+# Hello! 👋 I'm Leynier Gutiérrez González 👨🏻‍💻
 
 <codersrank-summary username="leynier"></codersrank-summary>
 
