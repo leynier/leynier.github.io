@@ -65,7 +65,7 @@ extra:
       link: https://www.researchgate.net/profile/Leynier_Gutierrez_Gonzalez
       name: Research Gate
     - icon: fontawesome/brands/medium
-      link: https://medium.com/@leynier41
+      link: https://leynier.medium.com
       name: Medium
     - icon: fontawesome/brands/twitter
       link: https://twitter.com/leynier41
@@ -76,9 +76,6 @@ extra:
     - icon: fontawesome/brands/facebook
       link: https://www.facebook.com/leynier41
       name: Facebook
-    - icon: fontawesome/brands/instagram
-      link: https://www.instagram.com/leynier41
-      name: Instagram
     - icon: fontawesome/brands/youtube
       link: https://www.youtube.com/channel/UCT1z3Pckv-U31HhL31e--rw
       name: Youtube
