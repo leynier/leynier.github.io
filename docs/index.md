@@ -2,7 +2,9 @@
 disqus: ""
 ---
 
-<meta name="google-site-verification" content="4smed8UwgUr7km-3rN9t5dl5aEQhi7zO7_akZzkUx0A" />
+{% block extrahead %}
+  <meta name="google-site-verification" content="4smed8UwgUr7km-3rN9t5dl5aEQhi7zO7_akZzkUx0A" />
+{% endblock %}
 
 # Hello! 👋 I'm Leynier Gutiérrez González 👨🏻‍💻
 
