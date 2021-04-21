@@ -2,6 +2,8 @@
 disqus: ""
 ---
 
+<meta name="google-site-verification" content="4smed8UwgUr7km-3rN9t5dl5aEQhi7zO7_akZzkUx0A" />
+
 # Hello! 👋 I'm Leynier Gutiérrez González 👨🏻‍💻
 
 <codersrank-summary username="leynier"></codersrank-summary>
