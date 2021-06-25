@@ -29,7 +29,7 @@ In my free time I'm always researching and learning about new technologies, fram
 
 ### GitHub Trophies
 
-![GitHub Trophies](https://github-profile-trophy.vercel.app/?username=leynier&column=3)
+![GitHub Trophies](https://github-profile-trophy.vercel.app/?username=leynier&column=4)
 
 ## Experience
 
