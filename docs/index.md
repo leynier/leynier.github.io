@@ -35,7 +35,7 @@ In my free time, I am always researching and learning about new technologies, fr
 
 <!-- <codersrank-work-experience username="leynier"></codersrank-work-experience> -->
 
-### Head of EngineeringHead of Engineering at [EducUp](https://educup.io)
+### Head of Engineering at [EducUp](https://educup.io)
 
 > January 2021 - Present
 
@@ -47,7 +47,7 @@ I lead a team of developers, both frontend and backend, in which we use agile me
 
 An app for business. And all businesses for an app. Create your 100% free store today and join the progress 🚀.
 
-### Professor at the [Faculty of Mathematics and Computing of the University of Havana](https://matcom.uh.cu)
+### Professor at the [MatCom](https://matcom.uh.cu)
 
 > December 2021 - Present
 
