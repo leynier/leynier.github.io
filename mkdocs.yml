@@ -10,6 +10,9 @@ theme:
   features:
     # - navigation.instant
     - navigation.tabs
+    - toc.integrate
+    - navigation.top
+    - header.autohide
   palette:
     scheme: slate
     primary: black
