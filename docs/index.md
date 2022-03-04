@@ -7,9 +7,9 @@ google-site-verification: 4smed8UwgUr7km-3rN9t5dl5aEQhi7zO7_akZzkUx0A
 
 <codersrank-summary username="leynier"></codersrank-summary>
 
-I'm a student of Computer Science. I know several programming languages such as C, C++, C#, Dart, Java, Python and Javascript; in addition to other markup or style languages such as HTML, CSS and JSON. I really like both mobile application development and web application development, using frameworks, software, technologies, etc like Android Studio, Flutter, Unity, Flask, Vue.js and Bootstrap.
+I'm a Computer Science graduate. I know several programming languages such as C, C++, C#, Dart, Java, Python, and Javascript; in addition to other markup or style languages such as HTML, CSS, and JSON. I really like both mobile application development and web application development, using frameworks, software, technologies, etc; like Android Studio, Flutter, Unity, Flask, FastAPI, Vue.js, and Bootstrap.
 
-In my free time I'm always researching and learning about new technologies, frameworks, etc. I'm good working both individually and as a team, I know the development methodologies of agile software and tools like Git.
+In my free time, I am always researching and learning about new technologies, frameworks, etc. I am good at working both individually and as a team, I know the development methodologies of agile software and tools like Git.
 
 ## Statistics
 
@@ -35,21 +35,39 @@ In my free time I'm always researching and learning about new technologies, fram
 
 <!-- <codersrank-work-experience username="leynier"></codersrank-work-experience> -->
 
+### Head of EngineeringHead of Engineering at [EducUp](https://educup.io)
+
+> January 2021 - Present
+
+I lead a team of developers, both frontend and backend, in which we use agile methodologies and technologies such as ASP.Net Core, Unity, Flutter, FastAPI, Firebase, AWS, among others.
+
+### CTO & Co-founder at [MeSirve](https://mesirve.app)
+
+> August 2021 - Present
+
+An app for business. And all businesses for an app. Create your 100% free store today and join the progress 🚀.
+
+### Professor at the [Faculty of Mathematics and Computing of the University of Havana](https://matcom.uh.cu)
+
+> December 2021 - Present
+
+An app for business. And all businesses for an app. Create your 100% free store today and join the progress 🚀.
+
 ### Flutter Developer at [EducUp](https://educup.io)
 
-> January 2020 - Present
+> January 2020 - January 2021
 
 Mainly developing mobile applications using the Flutter framework, but also maintaining mobile applications developed with Unity, as well as implementing systems and tools using Dart, Python and C#.
 
 ### Unity Developer at [Viera Academy](https://viera.academy)
 
-> September 2018 - Present
+> September 2018 - April 2021
 
 Member of the applications development team. In charge mainly of the functionalities related to third party services such as Unity IAP, Google Firebase, etc.
 
 ### Assistant Student at [University of Havana](https://www.uh.cu)
 
-> September 2019 - Present
+> September 2019 - March 2021
 
 Assistant Student of Computer Networks in the Faculty of Mathematics and Computing and of Computing and Programming at the [Faculty of Biology](https://www.fbio.uh.cu) of the University of Havana.
 
