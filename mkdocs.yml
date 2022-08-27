@@ -27,19 +27,15 @@ markdown_extensions:
   - toc:
       permalink: 🔗
 
-google_analytics:
-  - G-1ZVVREL82C
-  - auto
-
 nav:
   - Home:
-    - Intro: index.md
-    - Blog 📝: ./blog
+      - Intro: index.md
+      - Blog 📝: blog/index.md
   - Blog 📝:
-    - Last Posts: blog/index.md
-    - Inferfuzzy: blog/inferfuzzy/index.md
-    - Hidato - Haskell: blog/hidato-haskell/index.md
-    - Cuba Weather - De Cuba Para Cuba: blog/cuba-weather-de-cuba-para-cuba/index.md
+      - Last Posts: blog/index.md
+      - Inferfuzzy: blog/inferfuzzy/index.md
+      - Hidato - Haskell: blog/hidato-haskell/index.md
+      - Cuba Weather - De Cuba Para Cuba: blog/cuba-weather-de-cuba-para-cuba/index.md
 
 copyright: Copyright &copy; Leynier Gutiérrez González
 
