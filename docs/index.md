@@ -55,7 +55,7 @@ An app for business. And all businesses for an app. Create your 100% free store 
 
 ### Flutter Developer at [EducUp](https://educup.io)
 
-> January 2020 - January 2021
+> January 2020 - December 2020
 
 Mainly developing mobile applications using the Flutter framework, but also maintaining mobile applications developed with Unity, as well as implementing systems and tools using Dart, Python and C#.
 
@@ -83,7 +83,7 @@ Member of a team responsible for migrating and implementing new functionalities 
 
 ### [University of Havana](http://www.uh.cu)
 
-> Bachelor's Degree, Computer Science. September 2016 - Present
+> Bachelor's Degree, Computer Science. September 2016 - December 2021
 
 Student of Computer Science of the Faculty of Mathematics and Computation of the University of Havana. I have represented the faculty and the university in many events such as the International Girls' Day on ICTs developed at the Cuba Security Center, the ICT Boulevard developed at the Central Palace of Computing and Electronics of Cuba, etc.
 
