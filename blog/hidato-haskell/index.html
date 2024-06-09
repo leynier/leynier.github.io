@@ -1,0 +1,1068 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://leynier.github.io/blog/hidato-haskell/">
+      
+      
+        <link rel="prev" href="../inferfuzzy/">
+      
+      
+        <link rel="next" href="../cuba-weather-de-cuba-para-cuba/">
+      
+      
+      <link rel="icon" href="../../assets/images/avatar.jpg">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.26">
+    
+    
+      
+        <title>Hidato - Haskell - Leynier Gutiérrez González</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hidato-haskell" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Leynier Gutiérrez González" class="md-header__button md-logo" aria-label="Leynier Gutiérrez González" data-md-component="logo">
+      
+  <img src="../../assets/images/avatar.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Leynier Gutiérrez González
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Hidato - Haskell
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/leynier" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../.." class="md-tabs__link">
+          
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  Blog 📝
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Leynier Gutiérrez González" class="md-nav__button md-logo" aria-label="Leynier Gutiérrez González" data-md-component="logo">
+      
+  <img src="../../assets/images/avatar.jpg" alt="logo">
+
+    </a>
+    Leynier Gutiérrez González
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/leynier" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Intro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog 📝
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Blog 📝
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Blog 📝
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog 📝
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inferfuzzy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inferfuzzy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Hidato - Haskell
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Hidato - Haskell
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#significado-de-haskell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Significado de Haskell
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#significado-de-hidato" class="md-nav__link">
+    <span class="md-ellipsis">
+      Significado de Hidato
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explicacion-del-hidato" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explicación del Hidato
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelacion-del-hidato" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modelación del Hidato
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algoritmo-de-solucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algoritmo de Solución
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#algoritmo-de-generacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Algoritmo de Generación
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementacion-en-haskell" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementación en Haskell
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementación en Haskell">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solucionador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solucionador
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generador" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generador
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual-para-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual para usuarios
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referencias
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cuba-weather-de-cuba-para-cuba/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cuba Weather - De Cuba Para Cuba
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="hidato-haskell">Hidato - Haskell<a class="headerlink" href="#hidato-haskell" title="Permanent link">🔗</a></h1>
+<blockquote>
+<p><a href="https://www.linkedin.com/in/carlos-bermudez-porto-3078bb165">Carlos Bermudez Porto</a> y Leynier Gutiérrez Gonzáles | October 25, 2020</p>
+</blockquote>
+<p><img alt="Hidato - Haskell" src="header.png" /></p>
+<blockquote>
+<p><a href="https://github.com/codestrange/declarative-programing-hidato-project">Repositorio de GitHub</a></p>
+</blockquote>
+<h2 id="significado-de-haskell">Significado de Haskell<a class="headerlink" href="#significado-de-haskell" title="Permanent link">🔗</a></h2>
+<p><strong>Haskell</strong> es un <a href="https://es.wikipedia.org/wiki/Lenguaje_de_programaci%C3%B3n">lenguaje de programación</a> estandarizado multi-propósito, <a href="https://es.wikipedia.org/wiki/Programaci%C3%B3n_funcional">funcionalmente puro</a>, con <a href="https://es.wikipedia.org/wiki/Evaluaci%C3%B3n_perezosa">evaluación no estricta y memorizada</a>, y <a href="https://es.wikipedia.org/wiki/Fuertemente_tipado">fuerte tipificación</a> estática. Su nombre se debe al lógico estadounidense <a href="https://es.wikipedia.org/wiki/Haskell_Curry">Haskell Curry</a>, debido a su aportación al <a href="https://es.wikipedia.org/wiki/C%C3%A1lculo_lambda">cálculo lambda</a>, el cual tiene gran influencia en el lenguaje. En Haskell, "una función es un ciudadano de primera clase" del lenguaje de programación. Como lenguaje de programación funcional, el constructor de controles primario es la función. El lenguaje tiene sus orígenes en las observaciones de Haskell Curry y sus descendientes intelectuales. <a href="https://es.wikipedia.org/wiki/Haskell">[1]</a></p>
+<h2 id="significado-de-hidato">Significado de Hidato<a class="headerlink" href="#significado-de-hidato" title="Permanent link">🔗</a></h2>
+<p><strong>Hidato</strong> es un <a href="https://es.wikipedia.org/wiki/Juego">juego</a> de <a href="https://es.wikipedia.org/wiki/L%C3%B3gica">lógica</a> creado por el Dr. Gyora Benedek, un matemático israelí. El objetivo de Hidato es rellenar el tablero con <a href="https://es.wikipedia.org/w/index.php?title=N%C3%BAmeros_consecutivos&amp;action=edit&amp;redlink=1">números consecutivos</a> que se conectan horizontal, vertical o diagonalmente. Los puzzles <strong>Numbrix</strong>, creados por <a href="https://es.wikipedia.org/w/index.php?title=Marilyn_Vos_Savant&amp;action=edit&amp;redlink=1">Marilyn Vos Savant</a>, son similares a Hidato excepto por los movimientos diagonales, que no están permitidos. Los nombres Numbrix e Hidato son marcas registradas. <a href="https://es.wikipedia.org/wiki/Hidato">[2]</a></p>
+<h2 id="explicacion-del-hidato">Explicación del Hidato<a class="headerlink" href="#explicacion-del-hidato" title="Permanent link">🔗</a></h2>
+<p>En el <strong>Hidato</strong>, el objetivo es rellenar el tablero con <strong>números consecutivos</strong> que <strong>se conectan horizontal, vertical o diagonalmente</strong>. En cada juego de Hidato, <strong>los números mayor y menor están marcados</strong> en el tablero. Todos los números consecutivos están adyacentes de forma vertical, horizontal o diagonal. Hay algunos números más en el tablero para ayudar a dirigir al jugador sobre cómo empezar a resolverlo y para asegurarse de que ese Hidato tiene solución única. Se suele jugar en una cuadrícula como Sudoku pero también existen tableros hexagonales u otros más irregulares con figuras como corazones, calaveras, etc. Cada puzzle de Hidato creado correctamente debe tener solución única.</p>
+<p><img alt="Un puzzle Hidato y su solución" src="image1.png" /></p>
+<blockquote>
+<p>Un puzzle Hidato y su solución</p>
+</blockquote>
+<h2 id="modelacion-del-hidato">Modelación del Hidato<a class="headerlink" href="#modelacion-del-hidato" title="Permanent link">🔗</a></h2>
+<p>Para representar el tablero del juego Hidato se utilizó una tupla de 3 elementos <code>(nRows, nCols, setCells)</code>. En lo adelante, cuando se haga referencia a un tablero de Hidato se hará referencia a la tupla <code>(nRows, nCols, setCells)</code>.</p>
+<p><strong>nRows:</strong> <code>x ∈ Ν</code>. Representa la cantidad de filas del tablero</p>
+<p><strong>nCols:</strong> <code>x ∈ Ν</code>. Representa la cantidad de columnas del tablero</p>
+<p><strong>setCells:</strong> El conjunto <code>S</code> de todos los vectores <code>〈x, y, v〉</code> donde <code>x, y ∈ Ν, 1 ≤ x ≤ nRows, 1 ≤ y ≤ nCols, v ∈ Ζ, -1 ≤ v, ∀ 〈x1, y1〉 ∈ ([1, nRows]×[1, nCols]) ∩ Z x Z</code> el conjunto <code>S</code> contiene un único vector <code>〈x2, y2, v2〉</code> tal que <code>x1 = x2</code> y <code>y1 = y2</code>, no existen <code>2</code> vectores <code>〈x1, y1, v1〉 ∈ S y 〈x2, y2, v2〉 ∈ S tal que x1 ≠ x2, y1 ≠ y2, v1 &gt; 0, v2 &gt; 0 y v1 = v2; y v ≤ nRows * nCols - |{〈x1, y1, v1〉 | 〈x1, y1, v1〉 ∈ S ∧ v1 = -1}|</code>. Conjunto de vectores donde cada uno representa una celda en el tablero. La primera y segunda componente del vector representan la fila y columna respectivamente en la que se encuentra la celda dentro del tablero y la tercera componente representa el valor de la celda en el tablero. Estos valores son todos mayores iguales a <code>-1</code> y representan lo siguiente:</p>
+<ul>
+<li><code>-1</code> representa un obstáculo, esa celda no se utiliza para el juego, de esta manera se pueden representar juegos de Hidato de la forma que se quiera utilizando obstáculos <em>(Externamente para el usuario se representa con <code>'x'</code>)</em></li>
+<li><code>0</code> Representa una celda en blanco, la cual debe ser rellenada para solucionar el Hidato <em>(Externamente para el usuario se representa con <code>'.'</code>)</em></li>
+<li>Mayor que <code>0</code> representa una celda con un número rellenado ya sea porque estaba así en un inicio o porque fue rellenado durante el proceso de resolución del Hidato.</li>
+</ul>
+<blockquote>
+<p>Ejemplo visual de un tablero de Hidato</p>
+</blockquote>
+<p><img alt="Plantilla de Hidato válida de 5x5 e Hidato resuelto de 5x5" src="image2.png" /></p>
+<blockquote>
+<p>Plantilla de Hidato válida de 5x5 e Hidato resuelto de 5x5</p>
+</blockquote>
+<p>Se define como una <strong>plantilla de Hidato</strong> a un tablero donde <code>setCells</code> no contenga vectores con valores mayores que <code>1</code> en su tercera componente.</p>
+<p>Se define como una <strong>plantilla de Hidato válida</strong> a una <strong>plantilla de Hidato</strong> si partiendo desde ella y realizando transformaciones válidas al conjunto setCells es posible llegar a un <strong>Hidato resuelto</strong>.</p>
+<p>Las transformaciones válidas son aquellas que a partir de un tablero de Hidato se escoge un vector del conjunto <code>setCells</code> tal que su <strong>tercera componente</strong> sea <strong>igual</strong> a <code>0</code> y se modifica esa componente colocando un valor diferente de <code>0</code> siempre y cuando el resultado sea un tablero de Hidato.</p>
+<p>Se define que <code>2</code> vectores <code>〈x1, y1, v1〉</code> y <code>〈x2, y2, v2〉</code>  del conjunto <code>setCells</code> de un tablero de Hidato son <strong>adyacentes</strong> si existe <code>〈x3, y3〉 ∈ ([-1, 1]×[-1, 1]) ∩ Z x Z - {〈0, 0〉}</code> tal que <code>〈x1, y1〉=〈x2, y2〉+〈x3, y3〉</code>.</p>
+<p>Se define como un <strong>Hidato resuelto</strong> a un tablero de Hidato que no contenga vectores en <code>setCells</code> con la tercera componente igual a <code>0</code> y que <code>∀ 〈x1, y1, v1〉 ∈ setCells</code> con <code>v1 &gt; 1</code> existe un vector <code>〈x2, y2, v2〉 ∈ setCells</code> que es adyacente con <code>〈x1, y1, v1〉</code> donde <code>v1 = v2 + 1</code>.</p>
+<h2 id="algoritmo-de-solucion">Algoritmo de Solución<a class="headerlink" href="#algoritmo-de-solucion" title="Permanent link">🔗</a></h2>
+<p>La idea general del algoritmo de solución es utilizar un recorrido por el grafo de posibles transformaciones válidas utilizando el algoritmo de búsqueda en profundidad o mejor conocido como DFS.</p>
+<p>La función <strong>solve</strong> recibe un tablero, un paso y un límite (este límite es igual al mayor número posible dentro del tablero o sea el mayor v) y realiza lo siguiente:</p>
+<ul>
+<li>Si el paso es igual al límite más uno es que el tablero está rellenado completo y por tanto se resolvió completamente, por lo que devuelve una lista conteniendo al tablero.</li>
+<li>Si no, devuelve una lista resultante de concatenar las listas de tableros resultantes del proceso de utilizar cada tablero generado por la invocación de la función <strong>stepMatrix</strong> pasándole los argumentos del tablero actual y el paso actual como argumento de un llamado recursivo a la función <strong>solve</strong> con el paso siguiente y el mismo límite.</li>
+</ul>
+<p>La función <strong>stepMatrix</strong> recibe un tablero y un paso y realiza lo siguiente:</p>
+<ul>
+<li>Si hay alguna celda con el valor igual al paso actual dentro del tablero actual y bien ese valor es 1 o la celda es adyacente con la celda que tiene el valor del paso anterior dentro del tablero actual devuelve una lista conteniendo al tablero actual.</li>
+<li>Si hay alguna celda con el valor igual al paso actual dentro del tablero actual y el valor NO es 1 y la celda NO es adyacente con la celda que tiene el valor del paso anterior dentro del tablero actual devuelve una lista vacía.</li>
+<li>Si no, devuelve una lista que contiene a los tableros resultantes del proceso de recorrer cada celda adyacente (que su valor sea diferente de 0) de la celda que tiene el valor del paso anterior dentro del tablero generando por cada una de estas celdas adyacentes un nuevo tablero con el valor de esa celda igual al paso actual.</li>
+</ul>
+<blockquote>
+<p>Ejemplo de pseudo implementación en Python del algoritmo de solución.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">limit</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">step</span> <span class="o">==</span> <span class="n">limit</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">table</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">item</span>
+            <span class="k">for</span> <span class="n">new_table</span> <span class="ow">in</span> <span class="n">step_matrix</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">solve</span><span class="p">(</span><span class="n">new_table</span><span class="p">,</span> <span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+        <span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">step_matrix</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">cell_in_table</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">table</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">get_cell_value</span><span class="p">(</span><span class="n">get_cell</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">step</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">is_adyacents</span><span class="p">(</span><span class="n">get_cell</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">step</span><span class="p">),</span> <span class="n">get_cell</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">table</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">update_cell_in_table</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">update_value_in_cell</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">cell</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">get_adyacents</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">get_cell</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">get_cell_value</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="p">]</span>
+</code></pre></div>
+<h2 id="algoritmo-de-generacion">Algoritmo de Generación<a class="headerlink" href="#algoritmo-de-generacion" title="Permanent link">🔗</a></h2>
+<p>La idea general del algoritmo de generación es generar una plantilla de Hidato válida aleatoriamente a partir de una cantidad de filas, de columnas y de un porcentaje de obstáculos, resolver esta plantilla para obtener un Hidato resuelto y luego realizar un proceso de eliminación de una cantidad de celdas (según la dificultad seleccionada) cuyos valores sean mayores que 1 y menores que el máximo v en un orden aleatorio comprobando en cada paso que al eliminar no sea posible generar más de un Hidato resuelto (siendo el único posible, el Hidato resuelto desde donde se comenzó el proceso de eliminación).</p>
+<ul>
+<li>La función <strong>generate</strong> recibe el número de filas, de columnas, el porcentaje de obstáculos y la dificultad y realiza lo siguiente: Utilizando la función <strong>generateHidatoSolved</strong> genera un Hidato resuelto que utiliza como argumento al llamar a la función removeCells pasándole además como argumento a esta una permutación aleatoria de las casillas del Hidato resuelto (generado por la función <strong>generateHidatoSolved</strong>) que se pueden eliminar (aquellas que el valor sea mayor que 1 y menor que el máximo valor) y el número de casillas que se puede eliminar según la dificultad devolviendo finalmente la plantilla de Hidato.</li>
+<li>La función <strong>generateHidatoSolved</strong> recibe el número de filas, de columnas y el porcentaje de obstáculos y realiza lo siguiente: Comprueba si la pseudo plantilla de Hidato generada aleatoriamente por la función <strong>generateRandomPseudoTemplate</strong> es una plantilla de Hidato válida (que es posible a partir de ella llegar a un Hidato resuelto), si lo es, devuelve esa plantilla, si no, lo intenta nuevamente.</li>
+<li>La función <strong>generateRandomPseudoTemplate</strong> recibe el número de filas, de columnas y el porcentaje de obstáculos y realiza lo siguiente: Devuelve una pseudo plantilla (plantilla que no se ha comprobado que sea una plantilla de Hidato válida) con la cantidad de filas y columnas recibida como argumentos y con una cantidad de casillas (según el porcentaje de obstáculos) marcadas como obstáculos aleatoriamente.</li>
+<li>La función <strong>removeCells</strong> recibe una plantilla, una permutación aleatoria de las casillas que se pueden eliminar y el número de casillas que se deben eliminar según la dificultad y realiza lo siguiente: Si la permutación aleatoria de las casillas que se pueden eliminar es vacía o el número de casillas que se debe eliminar según la dificultad es negativo se devuelve la plantilla si no se genera una nueva plantilla modificando el valor (poniéndolo en 0) de la casilla correspondiente (según la permutación aleatoria de las casillas) a partir de la plantilla recibida como argumento, con esta nueva plantilla comprueba si se generan más de un Hidato resuelto, en caso de ser así devuelve el resultado de aplicar un llamado recursivo a <strong>removeCells</strong> pasándole la plantilla recibida como argumento, la cola de la permutación aleatoria de las casillas que se pueden eliminar y el mismo número de casillas que se deben eliminar (pues en ese paso no es posible eliminar la casilla porque genera más de un Hidato resuelto), en caso de generar solamente un Hidato resuelto devuelve el resultado de aplicar un llamado recursivo a <strong>removeCells</strong> pasándole la nueva plantilla, la cola de la permutación aleatoria de las casillas que se pueden eliminar y un número menos de casillas que se deben eliminar (pues en ese paso es posible eliminar la casilla porque genera solamente un Hidato resuelto).</li>
+</ul>
+<blockquote>
+<p>Ejemplo de pseudo implementación en Python del algoritmo de generación.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">ratio</span><span class="p">,</span> <span class="n">diff</span><span class="p">):</span>
+    <span class="n">hidato_solved</span> <span class="o">=</span> <span class="n">generate_hidato_solved</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">ratio</span><span class="p">)</span>
+    <span class="n">max_elem</span> <span class="o">=</span> <span class="n">n_rows</span> <span class="o">*</span> <span class="n">n_cols</span> <span class="o">-</span> <span class="n">count_obstacles</span><span class="p">(</span><span class="n">hidato_solved</span><span class="p">)</span>
+    <span class="n">cells_for_remove</span> <span class="o">=</span> <span class="n">random_shuffle</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">cell</span><span class="p">:</span> <span class="n">get_cell_value</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">get_cell_value</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">max_elem</span><span class="p">,</span> <span class="n">get_cells</span><span class="p">(</span><span class="n">hidato_solved</span><span class="p">)))</span>
+    <span class="n">cant_empty</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cells_for_remove</span><span class="p">)</span> <span class="o">*</span> <span class="n">diff</span><span class="p">)</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="n">remove_cells</span><span class="p">(</span><span class="n">hidato_solved</span><span class="p">,</span> <span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">cells_for_remove</span><span class="p">,</span> <span class="n">cant_empty</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">template</span>
+
+
+<span class="k">def</span> <span class="nf">generate_hidato_solved</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">ratio</span><span class="p">):</span>
+    <span class="n">pseudo_template</span> <span class="o">=</span> <span class="n">generate_random_pseudo_template</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">ratio</span><span class="p">)</span>
+    <span class="n">limit</span> <span class="o">=</span> <span class="n">n_rows</span> <span class="o">*</span> <span class="n">n_cols</span> <span class="o">-</span> <span class="n">count_obstacles</span><span class="p">(</span><span class="n">pseudo_template</span><span class="p">)</span>
+    <span class="n">solves</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">pseudo_template</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">solves</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">solves</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">generate_hidato_solved</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">ratio</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">generate_random_pseudo_template</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">ratio</span><span class="p">):</span>
+    <span class="n">cant_obs</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">n_rows</span> <span class="o">*</span> <span class="n">n_cols</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">)</span>
+    <span class="n">blank_template</span> <span class="o">=</span> <span class="n">create_black_template</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">)</span>
+    <span class="n">cells_for_remove</span> <span class="o">=</span> <span class="n">take</span><span class="p">(</span><span class="n">cant_obs</span><span class="p">,</span> <span class="n">random_shuffle</span><span class="p">(</span><span class="n">get_cells</span><span class="p">(</span><span class="n">blank_template</span><span class="p">)))</span>
+    <span class="n">dark_template</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">acc</span><span class="p">,</span> <span class="n">cell</span><span class="p">:</span> <span class="n">update_cell_in_table</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">update_value_in_cell</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">cell</span><span class="p">)),</span> <span class="n">cells_for_remove</span><span class="p">,</span> <span class="n">blank_template</span><span class="p">)</span>
+    <span class="n">pseudo_template</span> <span class="o">=</span> <span class="n">update_cell_in_table</span><span class="p">(</span><span class="n">dark_template</span><span class="p">,</span> <span class="n">update_value_in_cell</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">select_random_cell</span><span class="p">(</span><span class="n">dark_template</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">pseudo_template</span>
+
+
+<span class="k">def</span> <span class="nf">remove_cells</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">cells_for_remove</span><span class="p">,</span> <span class="n">cant_empty</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">cells_for_remove</span> <span class="ow">or</span> <span class="n">cant_empty</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">template</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">head_cell</span> <span class="o">=</span> <span class="n">cells_for_remove</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">tail_cells</span> <span class="o">=</span> <span class="n">cells_for_remove</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">empty</span> <span class="o">=</span> <span class="n">update_value_in_cell</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">head_cell</span><span class="p">)</span>
+        <span class="n">new_template</span> <span class="o">=</span> <span class="n">update_cell_in_table</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">empty</span><span class="p">)</span>
+        <span class="n">limit</span> <span class="o">=</span> <span class="n">n_rows</span> <span class="o">*</span> <span class="n">n_cols</span> <span class="o">-</span> <span class="n">count_obstacles</span><span class="p">(</span><span class="n">new_template</span><span class="p">)</span>
+        <span class="n">solves</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">new_template</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">take</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">solves</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">remove_cells</span><span class="p">(</span><span class="n">new_template</span><span class="p">,</span> <span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">tail_cells</span><span class="p">,</span> <span class="n">cant_empty</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">remove_cells</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">tail_cells</span><span class="p">,</span> <span class="n">cant_empty</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="implementacion-en-haskell">Implementación en Haskell<a class="headerlink" href="#implementacion-en-haskell" title="Permanent link">🔗</a></h2>
+<p>Para la implementación en Haskell se utilizaron cuatro estructuras fundamentales, dos implementadas por defecto en Haskell y dos implementadas por los autores.</p>
+<div class="highlight"><pre><span></span><code><span class="kr">import</span><span class="w"> </span><span class="nn">Data.Map</span><span class="w"> </span><span class="p">(</span><span class="kt">Map</span><span class="p">)</span>
+<span class="kr">import</span><span class="w"> </span><span class="k">qualified</span><span class="w"> </span><span class="nn">Data.Map</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Map</span>
+<span class="kr">import</span><span class="w"> </span><span class="nn">Data.Set</span><span class="w"> </span><span class="p">(</span><span class="kt">Set</span><span class="p">,</span><span class="w"> </span><span class="nf">lookupMin</span><span class="p">,</span><span class="w"> </span><span class="nf">lookupMax</span><span class="p">)</span>
+<span class="kr">import</span><span class="w"> </span><span class="k">qualified</span><span class="w"> </span><span class="nn">Data.Set</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Set</span>
+
+<span class="kr">data</span><span class="w"> </span><span class="kt">Cell</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Cell</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">column</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="p">}</span>
+<span class="kr">data</span><span class="w"> </span><span class="kt">Matrix</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Matrix</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">columns</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="p">,</span><span class="w"> </span><span class="n">matrix</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Set</span><span class="w"> </span><span class="kt">Cell</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<h3 id="solucionador">Solucionador<a class="headerlink" href="#solucionador" title="Permanent link">🔗</a></h3>
+<p>La "cara pública" del solucionador es la función <strong>solveAll</strong> la cual mediante la característica llamada currying de Haskell que permite una aplicación parcial de una función, en este caso la función <strong>solveAll</strong> realiza una aplicación parcial de la función <strong>solveRecursiveDFS</strong> convirtiéndose la función <strong>solveAll</strong> en una función que recibe dos argumentos, una Matrix y una lista de enteros.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">solveAll</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Matrix</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">Matrix</span><span class="p">]</span>
+<span class="nf">solveAll</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">solveRecursiveDFS</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="kt">Cell</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">rows</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">columns</span><span class="w"> </span><span class="n">m</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">countObstacles</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">buildMap</span><span class="w"> </span><span class="n">m</span><span class="p">)</span>
+</code></pre></div>
+<p>En el llamado a la función <strong>solveRecursiveDFS</strong> se utilizan dos funciones <strong>countObstacles</strong> y <strong>buildMap</strong>.</p>
+<p>La función <strong>countObstacles</strong> calcula la cantidad de celdas con valor igual a <code>-1</code> auxiliándose de la función <strong>countInMatrix</strong> que permite contar la cantidad de celdas con valor igual a un número dado. Esta función se utiliza para contar la cantidad de casillas que no son obstáculos.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">countInMatrix</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Matrix</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<span class="nf">countInMatrix</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="p">(</span><span class="kt">Matrix</span><span class="w"> </span><span class="kr">_</span><span class="w"> </span><span class="kr">_</span><span class="w"> </span><span class="n">cells</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span>
+<span class="w">                    </span><span class="n">foldl</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="n">acc</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="n">acc</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="n">acc</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">cells</span>
+
+<span class="nf">countObstacles</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Matrix</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<span class="nf">countObstacles</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">countInMatrix</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<p>La función <strong>buildMap</strong> genera un mapa o diccionario a partir de las celdas de una matriz, utilizando como llaves los valores de las celdas y como valores las celdas. Este diccionario es utilizado posteriormente para saber si una casilla con un valor determinado se encuentra en el tablero y de ser así acceder a ella eficientemente.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">buildMap</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Matrix</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Map</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="kt">Cell</span>
+<span class="nf">buildMap</span><span class="w"> </span><span class="n">ma</span><span class="o">@</span><span class="p">(</span><span class="kt">Matrix</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="n">m</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Set</span><span class="o">.</span><span class="n">foldl</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="n">acc</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Map</span><span class="o">.</span><span class="n">insert</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="n">cell</span><span class="p">)</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="n">acc</span><span class="p">)</span><span class="w"> </span><span class="kt">Map</span><span class="o">.</span><span class="n">empty</span><span class="w"> </span><span class="n">m</span>
+</code></pre></div>
+<p>La función <strong>solveRecursiveDFS</strong> recibe 6 argumentos.</p>
+<ol>
+<li><strong>actualMatrix</strong>: En la matriz actual, representando una plantilla de Hidato válida con posibilidades de ser un Hidato resuelto.</li>
+<li><strong>step</strong>: Es el paso del algoritmo y representa el número que se está intentando rellenar, pero puede existir ya en el tablero.</li>
+<li><strong>prevCell</strong>: Es la celda que tiene el valor (step <code>-1</code>), ya sea porque estaba en el tablero o porque se rellenó, este variable tiene el objetivo de disminuir la complejidad temporal del algoritmo evitando tener que realizar el procesamiento para obtener en cada paso.</li>
+<li><strong>obs</strong>: Es el número de casillas que NO son obstáculos.</li>
+<li><strong>map</strong>: Es un diccionario de entero contra celdas, en la explicación sobre la función buildMap se puede leer más sobre su objetivo.</li>
+<li><strong>seeds</strong>: Una lista de enteros infinita, su objetivo es ser utilizada como semilla para generar número pseudo aleatorios utilizados en el proceso de recorrer las casillas adyacentes haciendo en cada paso del algoritmo en un orden no necesariamente igual.</li>
+</ol>
+<p>La función lo que hace es comprobar si se está en el último paso (que ya se rellenaron todas las casillas posibles y se llegó a un Hidato resuelto) o por lo contrario realizar los llamados recursivos buscando las posibles soluciones. (La explicación del algoritmo se encuentra en la sección Algoritmo de Solución).</p>
+<div class="highlight"><pre><span></span><code><span class="nf">solveRecursiveDFS</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Matrix</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Cell</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Map</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="kt">Cell</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">Matrix</span><span class="p">]</span>
+<span class="nf">solveRecursiveDFS</span><span class="w"> </span><span class="n">actualMatrix</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">prevCell</span><span class="w"> </span><span class="n">obs</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="n">seeds</span>
+<span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">obs</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">[</span><span class="n">actualMatrix</span><span class="p">]</span>
+<span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">otherwise</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">let</span><span class="w"> </span><span class="n">toAdd</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">stepMatrix</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">actualMatrix</span><span class="w"> </span><span class="n">prevCell</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="n">seeds</span>
+<span class="w">                    </span><span class="kr">in</span><span class="w"> </span><span class="n">concat</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">solveRecursiveDFS</span><span class="w"> </span><span class="n">matrix</span><span class="w"> </span><span class="p">(</span><span class="n">step</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">prevCell</span><span class="w"> </span><span class="n">obs</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="p">(</span><span class="n">tail</span><span class="w"> </span><span class="n">seeds</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span><span class="w"> </span><span class="n">prevCell</span><span class="p">)</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">toAdd</span><span class="w"> </span><span class="p">]</span>
+</code></pre></div>
+<p>La función <strong>stepMatrix</strong> calcula las posibles matrices o plantillas de Hidato válidas partiendo de una plantilla recibida como argumento y el número que tiene que rellenar en la matriz. Esto lo hace utilizando prevCell y map para mejorar la complejidad temporal y realizar menos cálculos además de la utilización de otras funciones como <strong>getAdjacents</strong> e <strong>isAdjacent</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">stepMatrix</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Matrix</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Cell</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Map</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="kt">Cell</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[(</span><span class="kt">Matrix</span><span class="p">,</span><span class="w"> </span><span class="kt">Cell</span><span class="p">)]</span>
+<span class="nf">stepMatrix</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">m</span><span class="o">@</span><span class="p">(</span><span class="kt">Matrix</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="n">cs</span><span class="w"> </span><span class="n">ma</span><span class="p">)</span><span class="w"> </span><span class="n">prevCell</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="n">seeds</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="kt">Map</span><span class="o">.</span><span class="n">notMember</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">map</span>
+<span class="w">      </span><span class="kr">then</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="n">newMatrix</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">getAdjacents</span><span class="w"> </span><span class="n">prevCell</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="n">cs</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="n">seeds</span><span class="p">,</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">actCell</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Set</span><span class="o">.</span><span class="n">elemAt</span><span class="w"> </span><span class="p">(</span><span class="kt">Set</span><span class="o">.</span><span class="n">findIndex</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="n">ma</span><span class="p">)</span><span class="w"> </span><span class="n">ma</span><span class="p">,</span>
+<span class="w">            </span><span class="n">value</span><span class="w"> </span><span class="n">actCell</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">newMatrix</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">(</span><span class="kt">Matrix</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="n">cs</span><span class="w"> </span><span class="p">(</span><span class="kt">Set</span><span class="o">.</span><span class="n">insert</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="n">ma</span><span class="p">),</span><span class="w"> </span><span class="n">cell</span><span class="p">)</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">      </span><span class="kr">else</span><span class="w">  </span><span class="kr">let</span><span class="w"> </span><span class="n">actCell</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="kt">Map</span><span class="o">.!</span><span class="w"> </span><span class="n">step</span>
+<span class="w">            </span><span class="kr">in</span><span class="w"> </span><span class="p">[</span><span class="n">newMatrix</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">isAdjacent</span><span class="w"> </span><span class="n">actCell</span><span class="w"> </span><span class="n">prevCell</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">actCell</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="kr">let</span><span class="w"> </span><span class="n">newMatrix</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">actCell</span><span class="p">)]</span>
+
+<span class="nf">getAdjacents</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Cell</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">Cell</span><span class="p">]</span>
+<span class="nf">getAdjacents</span><span class="w"> </span><span class="p">(</span><span class="kt">Cell</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="n">rs</span><span class="w"> </span><span class="n">cs</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="n">seeds</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="kt">Cell</span><span class="w"> </span><span class="n">nr</span><span class="w"> </span><span class="n">nc</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">|</span>
+<span class="w">        </span><span class="n">dr</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">genShuffle</span><span class="w"> </span><span class="n">seeds</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span>
+<span class="w">        </span><span class="n">dc</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">genShuffle</span><span class="w"> </span><span class="n">seeds</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span>
+<span class="w">        </span><span class="kr">let</span><span class="w"> </span><span class="p">(</span><span class="n">nr</span><span class="p">,</span><span class="w"> </span><span class="n">nc</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dr</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dc</span><span class="p">),</span>
+<span class="w">        </span><span class="n">nr</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="n">nr</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">rs</span><span class="p">,</span>
+<span class="w">        </span><span class="n">nc</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="n">nc</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">cs</span><span class="p">,</span>
+<span class="w">        </span><span class="n">not</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">dr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">dc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="p">]</span>
+
+<span class="nf">isAdjacent</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Cell</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Cell</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Bool</span>
+<span class="nf">isAdjacent</span><span class="w"> </span><span class="p">(</span><span class="kt">Cell</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="n">v1</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">Cell</span><span class="w"> </span><span class="n">f2</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="n">v2</span><span class="p">)</span>
+<span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="kt">Cell</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kt">Cell</span><span class="w"> </span><span class="n">f2</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="n">v2</span><span class="w">           </span><span class="ow">=</span><span class="w"> </span><span class="kt">False</span>
+<span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">abs</span><span class="w"> </span><span class="p">(</span><span class="n">f1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">f2</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">abs</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">c2</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">False</span>
+<span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">v2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w">                 </span><span class="ow">=</span><span class="w"> </span><span class="kt">False</span>
+<span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">otherwise</span><span class="w">                                </span><span class="ow">=</span><span class="w"> </span><span class="kt">True</span>
+</code></pre></div>
+<h3 id="generador">Generador<a class="headerlink" href="#generador" title="Permanent link">🔗</a></h3>
+<p>La "cara pública" del generador es la función <strong>generateGame</strong>, esta recibe la cantidad de filas y columnas, el porcentaje de obstáculos, la dificultad y un límite de tiempo que tendrá en generador para generar la plantilla de Hidato válida (más adelante se explicará con más detalles este límite de tiempo y porque es necesario). La función devuelve una tupla, en la primera componente significa si se puedo generar la plantilla y en la segunda componente la plantilla generada (notar que si la primera componente es igual a <code>False</code>, el valor de la segunda componente no tiene significado).</p>
+<div class="highlight"><pre><span></span><code><span class="nf">generateGame</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Float</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Difficulty</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="p">(</span><span class="kt">Bool</span><span class="p">,</span><span class="w"> </span><span class="kt">Matrix</span><span class="p">)</span>
+<span class="nf">generateGame</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="n">cn</span><span class="w"> </span><span class="n">ratio</span><span class="w"> </span><span class="n">dif</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">      </span><span class="n">maybeMatrix</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">generateRandomGame</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="n">cn</span><span class="w"> </span><span class="n">ratio</span>
+<span class="w">      </span><span class="kr">if</span><span class="w"> </span><span class="n">isNothing</span><span class="w"> </span><span class="n">maybeMatrix</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">            </span><span class="n">return</span><span class="w"> </span><span class="p">(</span><span class="kt">False</span><span class="p">,</span><span class="w"> </span><span class="n">blankMatrix</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">      </span><span class="kr">else</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">solution</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">maybe</span><span class="w"> </span><span class="p">(</span><span class="n">blankMatrix</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="n">cn</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="n">maybeMatrix</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">maxElem</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cn</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">countObstacles</span><span class="w"> </span><span class="n">solution</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">setForRemove</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Set</span><span class="o">.</span><span class="n">filter</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="n">x</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kr">let</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">maxElem</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">matrix</span><span class="w"> </span><span class="n">solution</span><span class="p">)</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Set</span><span class="w"> </span><span class="kt">Cell</span>
+<span class="w">            </span><span class="n">randomCells</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">genRCellFromSet</span><span class="w"> </span><span class="n">setForRemove</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Set</span><span class="o">.</span><span class="n">size</span><span class="w"> </span><span class="n">setForRemove</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">cant_empty</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">floor</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">fromIntegral</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">emptyRatio</span><span class="w"> </span><span class="n">dif</span>
+<span class="w">            </span><span class="n">seed</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">randomIO</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="kt">Int</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">gen</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">mkStdGen</span><span class="w"> </span><span class="n">seed</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">seeds</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">randoms</span><span class="w"> </span><span class="n">gen</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">game</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">removeCells</span><span class="w"> </span><span class="n">solution</span><span class="w"> </span><span class="n">randomCells</span><span class="w"> </span><span class="n">cant_empty</span><span class="w"> </span><span class="n">seeds</span>
+<span class="w">            </span><span class="n">return</span><span class="w"> </span><span class="p">(</span><span class="kt">True</span><span class="p">,</span><span class="w"> </span><span class="n">game</span><span class="p">)</span>
+</code></pre></div>
+<p>La función generateGame se auxilia de la función <strong>generateRandomGame</strong> para obtener un Hidato resuelto. Para realizar esta operación se utiliza un tiempo límite, debido a la naturaleza aleatoria de <strong>generateRandomGame</strong> (no se asegura que termine, porque puede dependiendo de los parámetros demorar mucho o incluso con una bajísima probabilidad realizar un ciclo infinito).</p>
+<p>En caso de sobrepasar el límite de tiempo es devuelto una tupla con la primera componente en <code>False</code>. En caso de no sobrepasar el tiempo, se realiza un proceso de <em>"eliminación"</em> (poner con valor cero varias celdas) comprobando en cada paso que al hacerlo se mantenga la unicidad de la solución de esa plantilla (que los posibles Hidato resueltos es solamente uno).</p>
+<div class="highlight"><pre><span></span><code><span class="nf">generateRandomGame</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Float</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="kt">Matrix</span>
+<span class="nf">generateRandomGame</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="n">cn</span><span class="w"> </span><span class="n">ratio</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">      </span><span class="n">maybeTemplate</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="mi">1000000</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">generateRandom</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="n">cn</span><span class="w"> </span><span class="n">ratio</span>
+<span class="w">      </span><span class="kr">if</span><span class="w"> </span><span class="n">isNothing</span><span class="w"> </span><span class="n">maybeTemplate</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">            </span><span class="n">generateRandomGame</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="n">cn</span><span class="w"> </span><span class="n">ratio</span>
+<span class="w">      </span><span class="kr">else</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">maybe</span><span class="w"> </span><span class="p">(</span><span class="n">blankMatrix</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="n">cn</span><span class="p">)</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="n">maybeTemplate</span>
+<span class="w">            </span><span class="n">seed</span><span class="w"> </span><span class="ow">&lt;-</span><span class="w"> </span><span class="n">randomIO</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">IO</span><span class="w"> </span><span class="kt">Int</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">gen</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">mkStdGen</span><span class="w"> </span><span class="n">seed</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">seeds</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">randoms</span><span class="w"> </span><span class="n">gen</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span>
+<span class="w">            </span><span class="kr">let</span><span class="w"> </span><span class="n">solutions</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">solveAll</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="n">seeds</span>
+<span class="w">            </span><span class="kr">if</span><span class="w"> </span><span class="n">null</span><span class="w"> </span><span class="n">solutions</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">                  </span><span class="n">generateRandomGame</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="n">cn</span><span class="w"> </span><span class="n">ratio</span>
+<span class="w">            </span><span class="kr">else</span>
+<span class="w">              </span><span class="n">return</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">head</span><span class="w"> </span><span class="n">solutions</span>
+</code></pre></div>
+<p>El orden de las casillas escogidas para eliminar se realiza con una permutación aleatoria del conjunto de casillas disponibles para eliminar (las que tengan como valor mayor que <code>1</code> y menor que el máximo). Luego utilizando la función <strong>removeCells</strong> que lo que realiza es recorrer la permutación aleatoria y comprobar si eliminando la casilla i-ésima se mantiene la unicidad, en caso de ser así se elimina y se pasa la siguiente casilla dentro de la permutación aleatoria.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">removeCells</span><span class="w"> </span><span class="ow">::</span><span class="w"> </span><span class="kt">Matrix</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">Cell</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="p">[</span><span class="kt">Int</span><span class="p">]</span><span class="w"> </span><span class="ow">-&gt;</span><span class="w"> </span><span class="kt">Matrix</span>
+<span class="nf">removeCells</span><span class="w"> </span><span class="n">sol</span><span class="o">@</span><span class="p">(</span><span class="kt">Matrix</span><span class="w"> </span><span class="n">rn</span><span class="w"> </span><span class="n">cn</span><span class="w"> </span><span class="n">cs</span><span class="p">)</span><span class="w"> </span><span class="n">cells</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="n">seeds</span><span class="w"> </span><span class="ow">=</span>
+<span class="w">      </span><span class="kr">if</span><span class="w">    </span><span class="n">null</span><span class="w"> </span><span class="n">cells</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">            </span><span class="n">sol</span>
+<span class="w">      </span><span class="kr">else</span>
+<span class="w">            </span><span class="kr">let</span><span class="w">   </span><span class="p">(</span><span class="n">headCell</span><span class="kt">:</span><span class="w"> </span><span class="n">tailCells</span><span class="p">)</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">cells</span>
+<span class="w">                  </span><span class="n">rowCell</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="n">headCell</span>
+<span class="w">                  </span><span class="n">colCell</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">column</span><span class="w"> </span><span class="n">headCell</span>
+<span class="w">                  </span><span class="n">empty</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="kt">Cell</span><span class="w"> </span><span class="n">rowCell</span><span class="w"> </span><span class="n">colCell</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">                  </span><span class="n">matrix</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">editMatrixCell</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="n">empty</span>
+<span class="w">                  </span><span class="n">solutions</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">solveAll</span><span class="w"> </span><span class="n">matrix</span><span class="w"> </span><span class="n">seeds</span>
+<span class="w">                  </span><span class="n">isUnix</span><span class="w"> </span><span class="ow">=</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="p">(</span><span class="n">take</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">solutions</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">            </span><span class="kr">in</span><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="n">isUnix</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">                        </span><span class="n">removeCells</span><span class="w"> </span><span class="n">matrix</span><span class="w"> </span><span class="n">tailCells</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">seeds</span>
+<span class="w">                  </span><span class="kr">else</span>
+<span class="w">                        </span><span class="n">removeCells</span><span class="w"> </span><span class="n">sol</span><span class="w"> </span><span class="n">tailCells</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="n">seeds</span>
+</code></pre></div>
+<p>Luego de terminado el proceso de eliminación, ya sea porque se acabaron las casillas disponibles en la permutación aleatoria o porque se llegó al número de casillas que se debían eliminar, se retorna la plantilla de Hidato válida resultante.</p>
+<h2 id="manual-para-usuarios">Manual para usuarios<a class="headerlink" href="#manual-para-usuarios" title="Permanent link">🔗</a></h2>
+<p>Es necesario instalar <strong>Stack</strong>, este se puede instalar en la mayoría de los sistemas operativos similares a <strong>Unix</strong>, incluido <strong>macOS</strong>, y en <strong>Windows</strong>.</p>
+<p>Para la mayoría de los sistemas operativos Unix, la forma más sencilla de instalar es ejecutar:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sSL<span class="w"> </span>https://get.haskellstack.org/<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</code></pre></div>
+<p>o:</p>
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>-qO-<span class="w"> </span>https://get.haskellstack.org/<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</code></pre></div>
+<p>En <strong>Windows</strong>, puede descargar e instalar el <a href="https://get.haskellstack.org/stable/windows-x86_64-installer.exe">instalador de Windows de 64 bits</a>.</p>
+<p>Para otros sistemas operativos y descargas directas, consulte la <a href="https://docs.haskellstack.org/en/stable/install_and_upgrade">guía de instalación y actualización</a>. <a href="https://docs.haskellstack.org/en/stable/README">[3]</a></p>
+<p>Lo siguiente es clonar el <a href="https://github.com/codestrange/declarative-programing-hidato-project.git">repositorio de GitHub</a> utilizando Git o descargar el <a href="https://github.com/codestrange/declarative-programing-hidato-project/archive/main.zip">.zip</a> y descomprimirlo.</p>
+<p>Luego, dentro de la carpeta del proyecto ejecutar <code>stack setup</code>, después <code>stack build</code> y por último <code>stack exec hidato-exe</code> para ejecutar el proyecto.</p>
+<p><img alt="Manual para usuarios" src="image3.gif" /></p>
+<blockquote>
+<p><a href="https://github.com/codestrange/declarative-programing-hidato-project">https://github.com/codestrange/declarative-programing-hidato-project</a></p>
+</blockquote>
+<p>Los comandos disponibles del <strong>Hidato</strong> son <code>4</code>.</p>
+<ul>
+<li><code>help</code>: Para ver la ayuda, también es posible ver la ayuda de un comando especifico utilizando <code>help comando</code></li>
+<li><code>generate</code>: Para generar una plantilla de Hidato, los argumentos son cantidad de filas, cantidad de columnas, la razón de la cantidad de obstáculos respecto al tamaño del tablero, la dificultad, el nombre del fichero donde se guardará la plantilla de Hidato y, por último, opcionalmente un tiempo límite expresado en millonésimas de segundos, por defecto es un minuto. Por ejemplo: <code>generate 5 5 0.2 Normal hidato.txt</code>. Las dificultades son <code>Easy</code>, <code>Normal</code> y <code>Hard</code>.</li>
+<li><code>solve</code>: Para resolver un Hidato, recibe como argumento la dirección del fichero donde se encuentra la plantilla del Hidato a resolver. Por ejemplo: <code>solve hidato.txt</code></li>
+<li><code>exit</code>: Para salir del programa</li>
+</ul>
+<p><img alt="Manual para usuarios" src="image4.gif" /></p>
+<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">🔗</a></h2>
+<ol>
+<li><a href="https://es.wikipedia.org/wiki/Haskell">Página sobre Haskell en la Wikipedia</a></li>
+<li><a href="https://es.wikipedia.org/wiki/Hidato">Página sobre Hidato en la Wikipedia</a></li>
+<li><a href="https://docs.haskellstack.org/en/stable/README">Documentación de Haskell Stack</a></li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; Leynier Gutiérrez González
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://www.linkedin.com/in/leynier" target="_blank" rel="noopener" title="LinkedIn" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://github.com/leynier" target="_blank" rel="noopener" title="GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://profile.codersrank.io/user/leynier" target="_blank" rel="noopener" title="Codersrank" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3l89.3 89.4-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://x.com/leynier41" target="_blank" rel="noopener" title="X" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9L389.2 48zm-24.8 373.8h39.1L151.1 88h-42l255.3 333.8z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://www.instagram.com/leynierdev" target="_blank" rel="noopener" title="Instagram" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://t.me/leynier" target="_blank" rel="noopener" title="Telegram" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M248 8C111.033 8 0 119.033 0 256s111.033 248 248 248 248-111.033 248-248S384.967 8 248 8Zm114.952 168.66c-3.732 39.215-19.881 134.378-28.1 178.3-3.476 18.584-10.322 24.816-16.948 25.425-14.4 1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25 5.342-39.5 3.652-3.793 67.107-61.51 68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608 69.142-14.845 10.194-26.894 9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7 18.45-13.7 108.446-47.248 144.628-62.3c68.872-28.647 83.183-33.623 92.511-33.789 2.052-.034 6.639.474 9.61 2.885a10.452 10.452 0 0 1 3.53 6.716 43.765 43.765 0 0 1 .417 9.769Z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:leynier41@gmail.com" target="_blank" rel="noopener" title="Gmail" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.7l167.6-182.9c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8l-88.3-44.2C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "toc.integrate", "navigation.top", "header.autohide"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ad660dcc.min.js"></script>
+      
+    
+  </body>
+</html>
