@@ -23,7 +23,7 @@ pip install inferfuzzy
 
 ### Uso
 
-Creación de variables lingüísticas y sus conjuntos difusos asociados.
+#### Creación de Variables Lingüísticas y Conjuntos Difusos
 
 ```python
 variable_1 = Var("variable_name_1")
@@ -37,7 +37,7 @@ variable_2 += "set_name_5", LambdaMembership(40, 60, 80)
 variable_2 += "set_name_6", LMembership(30, 50)
 ```
 
-Declarar las reglas semánticas y el método de inferencia a utilizar.
+#### Declaración de Reglas Semánticas y Método de Inferencia
 
 ```python
 mamdani = MamdaniSystem(defuzz_func=centroid_defuzzification)
@@ -45,7 +45,7 @@ mamdani += variable_1.into("set_name_1") | variable_1.into("set_name_3"), variab
 mamdani += variable_1.into("set_name_2"), variable_2.into("set_name_4")
 ```
 
-Usando el método de inferencia difusa para valores ingresados por el usuario.
+#### Uso del Método de Inferencia Difusa para Valores Ingresados por el Usuario
 
 ```python
 variable_1_val = float(input())
@@ -54,11 +54,11 @@ mamdani_result: float = mamdani.infer(variable_name_1=variable_1_val)["variable_
 
 ## Características del Sistema de Inferencia
 
-La biblioteca contiene implementados los métodos de inferencia *Mamdani* y *Larsen*. Pero es posible implementar partiendo de una base común otros métodos de inferencia.
+La biblioteca incluye implementaciones de los métodos de inferencia *Mamdani* y *Larsen*. Sin embargo, se pueden implementar otros métodos de inferencia partiendo de una base común.
 
-Los métodos de inferencia reciben una función de *defuzzificación*. La biblioteca contiene implementadas *Centroide*, *Bisectriz*, *Máximo Central*, *Máximo más pequeño* y *Máximo más grande*.
+Los métodos de inferencia requieren una función de *defuzzificación*. La biblioteca incluye implementaciones de las siguientes funciones de defuzzificación: *Centroide*, *Bisectriz*, *Máximo Central*, *Máximo más Pequeño* y *Máximo más Grande*.
 
-Durante el proceso de definición de los conjuntos difusos esto requieren una función de membresía que puede ser implementada o utilizar una de las disponibles en la biblioteca.
+Durante el proceso de definición de los conjuntos difusos, se requiere una función de membresía que puede ser implementada o utilizar una de las disponibles en la biblioteca.
 
 Funciones de membresía implementadas en **Inferfuzzy**:
 
@@ -69,13 +69,13 @@ Funciones de membresía implementadas en **Inferfuzzy**:
 * Función Z
 * Función Gaussiana
 
-La *T-conorm* y *T-norm* utilizadas en las reglas de inferencia, así como el método de agregación de los conjuntos son posibles de sobrescribir, por defecto, son *mínimo*, *máximo* y *máximo* respectivamente.
+La *T-conorm* y *T-norm* utilizadas en las reglas de inferencia, así como el método de agregación de los conjuntos, se pueden sobrescribir. Por defecto, son *mínimo*, *máximo* y *máximo* respectivamente.
 
 Es posible definir más de una variable de salida para el sistema de inferencia difusa implementado en la biblioteca.
 
 ## Estructura de la Implementación
 
-La implementación se sostiene sobre 7 clases fundamentales:
+La implementación se basa en siete clases fundamentales:
 
 * `Membership`
 * `BaseSet`
@@ -87,7 +87,7 @@ La implementación se sostiene sobre 7 clases fundamentales:
 
 ### Membership
 
-Es la clase encargada de representar una función de membresía junto a los puntos (llamados `items` internamente)
+Clase que representa una función de membresía junto a los puntos (`items`) internamente.
 
 ```python
 class Membership:
@@ -101,7 +101,7 @@ class Membership:
 
 ### BaseSet
 
-Es la clase encargada de representar un conjunto difuso. Recibe como parámetros un objeto de tipo `Membership` representando la función de membresía del conjunto y un método de agregación.
+Clase que representa un conjunto difuso. Recibe un objeto de tipo `Membership` representando la función de membresía del conjunto y un método de agregación.
 
 ```python
 class BaseSet:
@@ -132,7 +132,7 @@ class BaseSet:
 
 ### BaseVar
 
-Es la clase encargada de representar una variable lingüística. Recibe como parámetros una función de unión, una función de intercepción y una lista de objetos de tipo `BaseSet` representando los conjuntos difusos de la variable.
+Clase que representa una variable lingüística. Recibe una función de unión, una función de intercepción y una lista de objetos de tipo `BaseSet` representando los conjuntos difusos de la variable.
 
 ```python
 class BaseVar:
@@ -158,7 +158,7 @@ class BaseVar:
 
 ### BaseRule
 
-Es la clase encargada de representar una regla de inferencia. Recibe como parámetro un objeto de tipo `Predicate` representando el antecedente de la regla.
+Clase que representa una regla de inferencia. Recibe un objeto de tipo `Predicate` representando el antecedente de la regla.
 
 ```python
 class BaseRule:
@@ -169,7 +169,7 @@ class BaseRule:
         raise NotImplementedError()
 ```
 
-`BaseRule` no contiene consecuencias porque las consecuencias de todos los tipos de reglas no son de la misma estructura. La clase `Rule` hereda de `BaseRule` y representa las reglas en los que el sistema produce un conjunto o más como resultado.
+`BaseRule` no contiene consecuencias porque las consecuencias de todos los tipos de reglas no son de la misma estructura. La clase `Rule` hereda de `BaseRule` y representa las reglas en las que el sistema produce un conjunto o más como resultado.
 
 ```python
 class Rule(BaseRule):
@@ -193,7 +193,7 @@ class Rule(BaseRule):
 
 ### Predicate
 
-Es la clase encargada de representar a los antecedentes. De ella heredan cuatro clases: `AndPredicate`, `OrPredicate`, `NotPredicate` y `VarSet`. Las primeras tres para representar las relaciones lógicas de unión, intercepción y negación; y la última representa la inclusión de una variable en un determinado conjunto, siendo esta la clase básica para representar a los antecedentes.
+Clase que representa a los antecedentes. De ella heredan cuatro clases: `AndPredicate`, `OrPredicate`, `NotPredicate` y `VarSet`. Las primeras tres representan las relaciones lógicas de unión, intercepción y negación, y la última representa la inclusión de una variable en un determinado conjunto, siendo esta la clase básica para representar a los antecedentes.
 
 ```python
 class Predicate:
@@ -239,7 +239,7 @@ class VarSet(Predicate):
 
 ### InferenceSystem
 
-Es la clase encargada de representar el sistema de inferencia. Recibe como parámetros las reglas y una función de defuzzificación y con el método `infer` permite realizar la inferencia según los valores proveídos.
+Clase que representa el sistema de inferencia. Recibe las reglas y una función de defuzzificación. El método `infer` permite realizar la inferencia según los valores proveídos.
 
 ```python
 class InferenceSystem:
@@ -272,34 +272,32 @@ class InferenceSystem:
         return result
 ```
 
-## Ejemplo de como utilizar Inferfuzzy
+## Ejemplo de Uso de Inferfuzzy
 
-Como ejemplo se utilizará el siguiente problema.
+Como ejemplo, se utilizará el siguiente problema: se desea inferir el porcentaje de la cantidad de un determinado producto que se ha vendido en un día en un restaurante, cafetería, etc.
 
-Se desea inferir el por ciento de la cantidad de un determinado producto que se ha vendido en un día en un restaurante, cafetería, etc.
+Por ejemplo, el producto *Pollo*, se desea conocer bajo determinadas condiciones qué porcentaje del *Pollo* sacado del almacén dispuesto para venderse ese día se termina vendiendo.
 
-Por ejemplo, el producto *Pollo*, se desea conocer bajo determinadas condiciones que por ciento del *Pollo* sacado del almacén dispuesto para venderse ese día se termina vendiendo.
+Para la implementación se seleccionaron `4` variables lingüísticas: `3` de entrada y `1` de salida.
 
-Para la implementación se seleccionaron `4` variables lingüísticas. Las primeras `3` de entrada y la última de salida.
-
-1. Cantidad de platos o derivados del producto que se vende. Por ejemplo, retomando el ejemplo del *Pollo*, si se vendería *Pollo Frito* y *Pollo Asado*, la variable valdría `2`. A esta variable le llamaremos `variety`.
+1. **Cantidad de platos o derivados del producto que se vende** (`variety`):
     * Baja: `low <= 2`. Función de Membresía: Z
     * Normal: `1 <= normal <= 5`. Función de Membresía: Gaussiana
     * Alta: `high >= 4`. Función de Membresía: S
-2. Por ciento que representa la variable `variety` del total de platos o derivados de productos que se vende. Por ejemplo, si se vende *Pollo Frito*, *Pollo Asado*, *Pescado* y *Cerdo* la variable valdría `50`. A esta variable se le llamará `diversity`.
+2. **Porcentaje de la variable `variety` del total de platos o derivados de productos que se vende** (`diversity`):
     * Baja: `low >= 70`. Función de Membresía: Gamma
     * Normal: `40 <= normal <= 80`. Función de Membresía: Lambda
     * Alta: `high <= 50`. Función de Membresía: L
-3. Por ciento de la utilización del local, si es `100` es que el local siempre está lleno, si es `0` es que no asiste ningún cliente al establecimiento. A esta variable se le llamará `clients`.
+3. **Porcentaje de la utilización del local** (`clients`):
     * Baja: `low <= 40`. Función de Membresía: L
     * Normal: `30 <= normal <= 90`. Función de Membresía: Lambda
     * Alta: `high >= 80`. Función de Membresía: Gamma
-4. Por ciento de la cantidad del producto que se vendió en el día, si es `100` fue se vendió todo al final del día, si es `50` fue que no se vendió la mitad de la cantidad. A esta variable se le llamará `sales`.
+4. **Porcentaje de la cantidad del producto que se vendió en el día** (`sales`):
     * Baja: `low <= 60`. Función de Membresía: L
     * Normal: `30 <= normal <= 90`. Función de Membresía: Lambda
     * Alta: `high >= 90`. Función de Membresía: Gamma
 
-### Declaración de las variables lingüísticas y sus conjuntos difusos en Inferfuzzy
+### Declaración de las Variables Lingüísticas y Conjuntos Difusos en Inferfuzzy
 
 ```python
 variety_var = Var("variety")
@@ -323,7 +321,7 @@ sales_percent_var += "normal", LambdaMembership(30, 60, 90)
 sales_percent_var += "high", GammaMembership(90, 100)
 ```
 
-### Gráficos de pertenencia de los conjuntos por cada variable
+### Gráficos de Pertenencia de los Conjuntos por Cada Variable
 
 ![Gráfico de la variable `variety`](images/var_variety.png)
 
@@ -508,7 +506,7 @@ mamdani += (
 ), sales_percent_var.into("normal")
 ```
 
-De manera análoga sería para Larsen utilizando la clase `LarsenSystem`.
+De manera análoga sería para *Larsen* utilizando la clase `LarsenSystem`.
 
 ### Resultados
 
@@ -534,14 +532,14 @@ Larsen 60.00%
 
 #### Análisis de los Resultados
 
-De los resultados, se puede observar que los métodos de Mamdani y Larsen obtienen resultados similares. A primera vista no es posible validar si los resultados se asemejan a la realidad, para esto es imprescindible la colaboración de un experto en el tema para la correcta definición de las variables, la asignación de las funciones de membresía más correctas así́ como la definición de las reglas asociadas.
+De los resultados, se puede observar que los métodos de Mamdani y Larsen obtienen resultados similares. A primera vista no es posible validar si los resultados se asemejan a la realidad, para esto es imprescindible la colaboración de un experto en el tema para la correcta definición de las variables, la asignación de las funciones de membresía más correctas así como la definición de las reglas asociadas.
 
 ## Conclusiones
 
-En este escrito se muestra las líneas generales de cómo utilizar Inferfuzzy, además de que muestra la capacidad de los sistemas de inferencia difusos para afrontar problemáticas donde la definición utilizando la lógica clásica no esté clara o que la solución utilizando esta sea demasiado engorrosa.
+En este artículo se muestra cómo utilizar Inferfuzzy, además de demostrar la capacidad de los sistemas de inferencia difusos para abordar problemas donde la definición utilizando la lógica clásica no está clara o donde la solución utilizando esta es demasiado complicada.
 
 ## Referencias
 
-1. Sistemas de Control con Lógica Difusa: Métodos de Mamdani y de Takagi-Sugeno-Kang (TSK). Autor: Samuel Diciembre Sanahuja
+1. Sistemas de Control con Lógica Difusa: Métodos de Mamdani y de Takagi-Sugeno-Kang (TSK). Autor: Samuel Diciembre Sanahuja
 2. Temas de Simulación. Autor: Dr. Luciano García Garrido
 3. First Course on Fuzzy Theory and Applications. Autor: Kwang H. Lee
